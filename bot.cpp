@@ -84,20 +84,6 @@ DWORD WINAPI Screenshot(LPVOID lpParam)
 	pitch = rc.Pitch;
 	HRCHECK(surface->UnlockRect());
 
-	// allocate screenshots buffers
-	//    shots = new LPBYTE[count];
-	//    for (UINT i = 0; i < count; i++)
-	//    {
-	//      shots[i] = new BYTE[pitch * mode.Height];
-	//    }
-
-	/*
-	int WATCH_Y = 520;
-	int RIGHT_WATCH = 1030;
-	int LEFT_WATCH = 890;
-	int WATCH_STEP = 61;
-	*/
-
 	while (true)
 	{
 		if (playing)
@@ -120,14 +106,12 @@ DWORD WINAPI Screenshot(LPVOID lpParam)
 
 			if ((int)bytePointer[index + 2] == 161 && (int)bytePointer[index + 1] == 116) {
 				clickRight = true;
-				//cout << "on the left\n";
 			}
 
 			index = (RIGHT_WATCH * 4 + (WATCH_Y * (rc.Pitch)));
 			
 			if ((int)bytePointer[index + 2] == 161 && (int)bytePointer[index + 1] == 116) {
 				clickRight = false;
-				//cout << "on the right\n";
 			}
 			
 			FreeMargin = 6;
@@ -155,7 +139,6 @@ DWORD WINAPI Screenshot(LPVOID lpParam)
 				}
 			}
 
-			//cout << "freeMargin :: " << FreeMargin << "   right? " << clickRight << "\n";
 
 			if (clickRight)
 				SetCursorPos(RIGHT_BUTTON_X, BUTTON_Y);
@@ -165,28 +148,21 @@ DWORD WINAPI Screenshot(LPVOID lpParam)
 			mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 			mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 
-			//clickCount++;
 
-			//int faster = (clickCount / 20) * 5;
-			
 			if (FreeMargin == 0)
 				Sleep(SLEEP1);
 			else if (FreeMargin > 1) {
 				for (; FreeMargin > 1; FreeMargin--) {
-					//cout << "	freeMargin :: " << FreeMargin << "   right? " << clickRight << "\n";
 					mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 					mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-					//clickCount++;
+
 					Sleep(SLEEP2);
-					//Sleep(100 - (FreeMargin*15) );
+
 				}
 			}
 
 			if (FreeMargin == 1) {
-				//cout << "	freeMargin :: " << FreeMargin << "   right? " << clickRight << "	NEW SHOT ";
-				//mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-				//mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-				
+
 				FreeMargin--;
 				Sleep(SLEEP1);
 			}
@@ -204,14 +180,6 @@ DWORD WINAPI Screenshot(LPVOID lpParam)
 		}
 	}
 
-	// save all screenshots
-	//for (UINT i = 0; i < count; i++)
-	//{
-	//  WCHAR file[100];
-	//  wsprintf(file, L"cap%i.png", i);
-	//  HRCHECK(SavePixelsToFile32bppPBGRA(mode.Width, mode.Height, pitch, shots[i], file, GUID_ContainerFormatPng));
-	//}
-
 cleanup:
 
 	RELEASE(surface);
@@ -224,9 +192,6 @@ cleanup:
 
 DWORD WINAPI click(LPVOID lpParam)
 {
-	// left button  : (844,  890)
-	// right button : (1070, 887)
-
 	while (true) {
 
 		if (playing) {
@@ -264,7 +229,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	LPDWORD dwThreadID = 0;
 	LPDWORD dwThreadIDscrn = 0;
 
-	//HANDLE hThread = CreateThread(NULL, 0, click, NULL, 0, dwThreadID);
 	HANDLE hThreadscrn = CreateThread(NULL, 0, Screenshot, NULL, 0, dwThreadIDscrn);
 
 	while (true)
@@ -279,7 +243,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		if (GetAsyncKeyState(0x52) && LASTR == 0)
 		{
-			//clickCount = 0;
 			playing = false;
 			++LEVEL;
 			LASTR = 100;
