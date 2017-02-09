@@ -1,3 +1,5 @@
+![alt tag](https://raw.githubusercontent.com/xphoniex/Lumberjack-Bot/master/lumber.jpg)
+
 # Lumberjack Bot
 
 Lumberjack is a very simple game on Telegram's platform and I put this bot together in a few hours. Still, it's nice! Definitely check it out, just type @gamebot and choose Lumberjack in any message window.
