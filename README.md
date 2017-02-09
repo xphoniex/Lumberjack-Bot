@@ -17,3 +17,6 @@ The bot was able to achieve a 510 high score and averages around 450.
 * You could zoom out the browser in order to see more trees coming, though you need to update parameters in the program accordingly.
 * You could keep track of both sides, meaning if there's a obstacle at right side in 4 clicks, you detect how many clicks can be pressed on the left after that, and then after the obsctacle on the left and so on.
 
+# Watch It In Action
+
+Click [here](https://raw.githubusercontent.com/xphoniex/Lumberjack-Bot/master/lumber.mp4) for the video.
